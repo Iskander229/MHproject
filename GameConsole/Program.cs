@@ -15,6 +15,9 @@ namespace GameConsole
             //Variables
             string playerName;
             int pickedMap = 0;
+            string infos;
+            string currentLevel;
+            int playerHp;
 
             //an instance of the DLL classes
             var DLLValidation = new Player(); 
@@ -57,26 +60,29 @@ namespace GameConsole
                         throw new FormatException("Input must be a number.");
                     }
 
-                    //Validate map choice
-                    if (pickedMap < 1 || pickedMap > 3)
-                    {
-                        throw new Exception("Choice must be between 1 and 3.");
-                    }
-
                     //Load the selected map
                     switch (pickedMap)
                     {
                         case 1:
                             DLLMap.LoadMapFromFile("FirstLevel.txt");
+                            currentLevel = "Level One!";
                             break;
                         case 2:
                             DLLMap.LoadMapFromFile("SecondLevel.txt");
+                            currentLevel = "Level Two!";
                             break;
                         case 3:
                             DLLMap.LoadMapFromFile("ThirdLevel.txt");
+                            currentLevel = "Level Three!";
                             break;
                         default:
                             throw new Exception("Wrong map selection.");
+                    }
+
+                    //Validate map choice
+                    if (pickedMap < 1 || pickedMap > 3)
+                    {
+                        throw new Exception("Choice must be between 1 and 3.");
                     }
 
                     mapLoaded = true; //Exit loop if success
@@ -87,11 +93,16 @@ namespace GameConsole
                     Console.WriteLine($"Unexpected error, Please try again. {e.Message}");
                 }
             }
+            
+            Console.Clear(); //Clearing the console for the map
 
             Console.WriteLine("Map loaded!");
             //Draw the map (from instances)
-            Console.Clear(); //Clearing the console for the map
             DLLMap.DrawMap();
+
+
+            //GAME INFOS:
+            
 
             //MOVEMENT
             //player variables
