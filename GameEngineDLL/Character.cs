@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,17 +12,16 @@ namespace GameEngineDLL
     {
         //Constants
         const int MAX_NAME_CHARACTERS = 20;
-        const int SQUARE_SIZE = 50;
         const int MAX_HP = 30;
         const int MAX_Strength = 7;
 
 
         // Variables
-        private string sValidationError = "";
-        private string sName = "";
-        private bool validationErrorsOccurred = false; // to use in console validation
-        public int currentHP;
-        public int Strength;
+        public string sValidationError = "";
+        public string sName = "";
+        public bool ValidationErrorsOccurred = false; // to use in console validation
+        public int currentHP = MAX_HP;
+        public int Strength = 3;
 
         //two properties to hold X and Y
         public int X = 0;
@@ -31,24 +32,11 @@ namespace GameEngineDLL
         {
             get
             {
-                try
-                {
-                    return sValidationError;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("An error occurred in DLL (ValidationError)", e);
-                }
+                // Simply return the validation error (if any).
+                return sValidationError;
             }
         }
 
-        // Property for validation status
-        public bool ValidationErrorsOccurred
-        {
-            get { return validationErrorsOccurred; }
-        }
-
-        // Name property with validation
         public string Name
         {
             get
@@ -59,34 +47,57 @@ namespace GameEngineDLL
             {
                 try
                 {
-                    // Clear previous error messages
+                    // Clear previous error message
                     sValidationError = "";
-                    validationErrorsOccurred = false; // Reset validation 
 
-                    // Trim spaces
+                    // Trim input to remove any surrounding spaces
                     value = value.Trim();
 
+                    // Validate if the name is empty
                     if (string.IsNullOrEmpty(value))
                     {
-                        validationErrorsOccurred = true;
                         sValidationError = "The name cannot be empty!";
+                        ValidationErrorsOccurred = true; // Set flag to true when validation fails
                     }
+                    // Validate if the name is too long
                     else if (value.Length > MAX_NAME_CHARACTERS)
                     {
-                        validationErrorsOccurred = true;
-                        sValidationError = "The name must be no more than " + MAX_NAME_CHARACTERS + " characters!";
+                        sValidationError = $"The name must be no more than {MAX_NAME_CHARACTERS} characters!";
+                        ValidationErrorsOccurred = true; // Set flag to true when validation fails
                     }
-
-                    // Only set sName if validation passes
-                    if (!validationErrorsOccurred)
+                    else
                     {
+                        // If validation passes, set the name and clear validation errors
                         sName = value;
+                        ValidationErrorsOccurred = false;
                     }
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("An error occurred in DLL (Name)", e);
+                    // Unexpected error; rethrow with additional details
+                    throw new Exception("An error occurred while setting the name.", e);
                 }
+            }
+        }
+
+
+
+        //METHODS
+
+        //if the character is dead
+        public bool IsDead()
+        {
+            return currentHP <= 0;
+        }
+
+        //If taking damage method
+        public void TakeDamage(int damage)
+        {
+            currentHP -= damage;
+            // Ensure HP doesn't go below zero
+            if (currentHP < 0)
+            {
+                currentHP = 0;
             }
         }
     }

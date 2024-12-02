@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace GameEngineDLL
 {
-    public class Player : Character
+    public class Hunter : Character
     {
         //variables
-
-
         
     }
 }

@@ -1,8 +1,12 @@
 ﻿//   ISKANDER TANIYEV            11/30/2024 2:40     FINISHED CONSOLE MAP;
 //   ISKANDER TANIYEV            11/30/2024 3:45     FINISHED MOVEMENT IN MAP;
 
-
+//     Iskander Taniyev       12/1/2024 10:22      Finished smallest requirements for game console and windows forms. Feeling a bit cooked
 using System;
+using System.Diagnostics.Eventing.Reader;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading;
 using GameEngineDLL;
 
@@ -13,36 +17,34 @@ namespace GameConsole
         static void Main(string[] args)
         {
             //Variables
-            string playerName;
             int pickedMap = 0;
-            string infos;
-            string currentLevel;
-            int playerHp;
 
             //an instance of the DLL classes
-            var DLLValidation = new Player(); 
-            var DLLMap = new Map();
+            Hunter myPLayer = new Hunter();
+            Character DLLVal = new Character(); 
+            Map DLLMap = new Map();
+
 
             Console.WriteLine("Please type your name (25 char max):");
 
             //Loop until valid input
             do
             {
-                playerName = Console.ReadLine();
+                DLLMap.playerName = Console.ReadLine();
 
-                //Set the name from dll for validation in setter
-                DLLValidation.Name = playerName; 
+                // Set the name from DLL for validation in setter
+                DLLVal.Name = DLLMap.playerName;
 
-                //error message
-                if (DLLValidation.ValidationErrorsOccurred)
+                // If validation error occurred, show the message
+                if (DLLVal.ValidationErrorsOccurred)
                 {
-                    Console.WriteLine(DLLValidation.ValidationError);
+                    Console.WriteLine(DLLVal.ValidationError); // Print the validation error message
                     Console.WriteLine("Please try again:");
                 }
 
-            } while (DLLValidation.ValidationErrorsOccurred);
+            } while (DLLVal.ValidationErrorsOccurred); 
 
-            Console.WriteLine("Welcome, " + DLLValidation.Name + "!");
+            Console.WriteLine("Welcome, " + DLLMap.playerName + "!");
             Thread.Sleep(1000);
             Console.WriteLine("Please Pick a map: \n 1: FirstLevel\n 2: SecondLevel\n 3: ThirdLevel");
 
@@ -65,19 +67,20 @@ namespace GameConsole
                     {
                         case 1:
                             DLLMap.LoadMapFromFile("FirstLevel.txt");
-                            currentLevel = "Level One!";
+                            DLLMap.currentLevel = "Level One!";
                             break;
                         case 2:
                             DLLMap.LoadMapFromFile("SecondLevel.txt");
-                            currentLevel = "Level Two!";
+                            DLLMap.currentLevel = "Level Two!";
                             break;
                         case 3:
                             DLLMap.LoadMapFromFile("ThirdLevel.txt");
-                            currentLevel = "Level Three!";
+                            DLLMap.currentLevel = "Level Three!";
                             break;
                         default:
                             throw new Exception("Wrong map selection.");
                     }
+
 
                     //Validate map choice
                     if (pickedMap < 1 || pickedMap > 3)
@@ -90,7 +93,7 @@ namespace GameConsole
                 //Exceptions if map was not loaded
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Unexpected error, Please try again. {e.Message}");
+                    Console.WriteLine($"Unexpected error", e);
                 }
             }
             
@@ -100,8 +103,8 @@ namespace GameConsole
             //Draw the map (from instances)
             DLLMap.DrawMap();
 
-
             //GAME INFOS:
+
             
 
             //MOVEMENT
@@ -109,8 +112,17 @@ namespace GameConsole
             ConsoleKeyInfo keyPressed;
             do
             {
-                keyPressed = Console.ReadKey(true);
+                DLLMap.RenderInfos(
+                DLLMap.playerName,
+                DLLMap.currentLevel,
+                DLLMap.myPlayer.currentHP,  // Pass currentHP
+                DLLMap.infos,
+                pickedMap
+                );
 
+                
+
+                keyPressed = Console.ReadKey(true);
                 switch (keyPressed.Key)
                 {
                     case ConsoleKey.A:
@@ -127,9 +139,8 @@ namespace GameConsole
                         break;
                 }
 
-            } while (keyPressed.Key != ConsoleKey.Escape); //Press Escape to end the game
-
-            Console.WriteLine("Game Over!");
+            } while (DLLMap.myPlayer.currentHP > 0);
+           
         }
     }
 }
