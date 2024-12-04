@@ -8,32 +8,21 @@ namespace GameEngineDLL
 {
     public class Sword
     {
-        //constants
-        private const int BreakChance = 5; // 1/5 chance
+        private const int BreakChance = 5; // chance of break
+        private int _strength;
 
-        //variables
-        public int Strength
+        public Sword()
         {
-            get
-            {
-                return this.Strength;
-            }
-            private set
-            {
-                this.Strength += Strength = RandomGenerator.Instance.Next(4, 10); // 
-                IsBroken = false;
-            }
-
+            _strength = RandomGenerator.Instance.Next(4, 10); // using singleton
+            IsBroken = false;
         }
 
-        public bool IsBroken
-        {
-            get;
-            private set;
-        }
+        public int Strength => _strength;
+        public bool IsBroken { get; private set; }
 
         public bool Use()
         {
+            // random chance to break
             if (RandomGenerator.Instance.Next(1, BreakChance + 1) == 1)
             {
                 IsBroken = true;
@@ -42,3 +31,4 @@ namespace GameEngineDLL
         }
     }
 }
+

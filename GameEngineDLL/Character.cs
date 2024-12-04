@@ -47,34 +47,34 @@ namespace GameEngineDLL
             {
                 try
                 {
-                    // Clear previous error message
+                    // Clear previous error 
                     sValidationError = "";
 
-                    // Trim input to remove any surrounding spaces
+                    // Trim input 
                     value = value.Trim();
 
-                    // Validate if the name is empty
+                    // name is empty
                     if (string.IsNullOrEmpty(value))
                     {
                         sValidationError = "The name cannot be empty!";
-                        ValidationErrorsOccurred = true; // Set flag to true when validation fails
+                        ValidationErrorsOccurred = true; //  when validation fails
                     }
                     // Validate if the name is too long
                     else if (value.Length > MAX_NAME_CHARACTERS)
                     {
                         sValidationError = $"The name must be no more than {MAX_NAME_CHARACTERS} characters!";
-                        ValidationErrorsOccurred = true; // Set flag to true when validation fails
+                        ValidationErrorsOccurred = true; // when validation fails
                     }
                     else
                     {
-                        // If validation passes, set the name and clear validation errors
+                        // If validation passes
                         sName = value;
                         ValidationErrorsOccurred = false;
                     }
                 }
                 catch (Exception e)
                 {
-                    // Unexpected error; rethrow with additional details
+                    // Unexpected error
                     throw new Exception("An error occurred while setting the name.", e);
                 }
             }

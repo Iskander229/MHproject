@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Reflection.Emit;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Xml.Linq;
 
 namespace GameEngineDLL
 {
@@ -17,6 +18,10 @@ namespace GameEngineDLL
 
         //Player instance
         public Hunter myPlayer = new Hunter();
+
+        //sword instance
+        public Sword CurrentSword { get; private set; }
+
 
         //Map array to hold the map layout
         public char[][] mapArray = new char[][] { };
@@ -81,6 +86,8 @@ namespace GameEngineDLL
         //Method to move the player
         public void MovePlayer(int newX, int newY)
         {
+            CurrentSword = new Sword();
+
             //Ensure the new position is within map bounds
             if (newX >= 0 && newY >= 0 && newY < mapArray.Length && newX < mapArray[newY].Length)
             {
@@ -96,7 +103,7 @@ namespace GameEngineDLL
                 {
                     infos = "PLAYER HAS WON!";
                     Console.Clear();
-                    Console.WriteLine("You won!");
+                    Console.WriteLine($"{myPlayer.Name} Has Won!");
                 
                 }
 
@@ -104,13 +111,21 @@ namespace GameEngineDLL
                 if (mapArray[newY][newX] == 'w')
                 {
                     infos = "...";
+
                     infos = "A Sword!";
+
+                    myPlayer.FindSword();
                 }
 
                 if (mapArray[newY][newX] == 'M')
                 {
+                    
                     infos = "Monster!!";
-                    myPlayer.TakeDamage(20); 
+                    //method for takin damage
+
+                    myPlayer.TakeDamage(20);
+                    //method for sword attacking
+                    myPlayer.EncounterMonster();
 
                     // Check if the player is dead
                     if (myPlayer.IsDead())

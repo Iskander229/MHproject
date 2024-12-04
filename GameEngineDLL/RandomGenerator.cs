@@ -9,12 +9,12 @@ namespace GameEngineDLL
     public sealed class RandomGenerator
     {
         private static readonly Random _instance = new Random();
-        private RandomGenerator() { }
+
+        private RandomGenerator() { } // Private constructor to prevent instantiation
 
         public static Random Instance
         {
-            //randomizing
-            get { return _instance; }
+            get { return _instance; } // Singleton instance of Random
         }
     }
 }
