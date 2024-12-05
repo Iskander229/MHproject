@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection.Emit;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Xml.Linq;
+using static GameEngineDLL.Monster;
 
 namespace GameEngineDLL
 {
@@ -22,7 +23,6 @@ namespace GameEngineDLL
         //sword instance
         public Sword CurrentSword { get; private set; }
 
-
         //Map array to hold the map layout
         public char[][] mapArray = new char[][] { };
 
@@ -32,11 +32,11 @@ namespace GameEngineDLL
         public string infos = "";
         public string currentLevel = "";
 
-        
 
         //Load map from a file
         public void LoadMapFromFile(string filename)
         {
+
             int Y = 0;
 
             foreach (string fileLine in System.IO.File.ReadAllLines(filename))
@@ -60,7 +60,7 @@ namespace GameEngineDLL
             }
         }
 
-        // Method to draw the map
+        // Method to draw the map for console
         public void DrawMap()
         {
             //cursor at the top left corner

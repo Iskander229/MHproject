@@ -1,7 +1,7 @@
 ﻿//   ISKANDER TANIYEV            11/30/2024 2:40     FINISHED CONSOLE MAP;
 //   ISKANDER TANIYEV            11/30/2024 3:45     FINISHED MOVEMENT IN MAP;
 
-//     Iskander Taniyev       12/1/2024 10:22      Finished smallest requirements for game console and windows forms. Feeling a bit cooked
+//     Iskander Taniyev       12/1/2024 10:22      Finished smallest requirements for game console Feeling a bit cooked
 using System;
 using System.Diagnostics.Eventing.Reader;
 using System.Reflection.Emit;

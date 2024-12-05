@@ -32,9 +32,6 @@
             this.lblPlayerName = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.lblMapChoice = new System.Windows.Forms.Label();
-            this.cboMaps = new System.Windows.Forms.ComboBox();
-            this.lblErrorName = new System.Windows.Forms.Label();
             this.lblErrorMap = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -72,62 +69,31 @@
             this.btnQuit.TabIndex = 3;
             this.btnQuit.Text = "Quit Game";
             this.btnQuit.UseVisualStyleBackColor = true;
-            // 
-            // lblMapChoice
-            // 
-            this.lblMapChoice.AutoSize = true;
-            this.lblMapChoice.Location = new System.Drawing.Point(87, 131);
-            this.lblMapChoice.Name = "lblMapChoice";
-            this.lblMapChoice.Size = new System.Drawing.Size(60, 25);
-            this.lblMapChoice.TabIndex = 4;
-            this.lblMapChoice.Text = "Map:";
-            // 
-            // cboMaps
-            // 
-            this.cboMaps.FormattingEnabled = true;
-            this.cboMaps.Location = new System.Drawing.Point(198, 131);
-            this.cboMaps.Name = "cboMaps";
-            this.cboMaps.Size = new System.Drawing.Size(229, 33);
-            this.cboMaps.TabIndex = 5;
-            // 
-            // lblErrorName
-            // 
-            this.lblErrorName.AutoSize = true;
-            this.lblErrorName.ForeColor = System.Drawing.Color.Crimson;
-            this.lblErrorName.Location = new System.Drawing.Point(609, 51);
-            this.lblErrorName.Name = "lblErrorName";
-            this.lblErrorName.Size = new System.Drawing.Size(118, 25);
-            this.lblErrorName.TabIndex = 6;
-            this.lblErrorName.Text = "Error name";
-            this.lblErrorName.Visible = false;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // lblErrorMap
             // 
             this.lblErrorMap.AutoSize = true;
             this.lblErrorMap.ForeColor = System.Drawing.Color.Crimson;
-            this.lblErrorMap.Location = new System.Drawing.Point(480, 134);
+            this.lblErrorMap.Location = new System.Drawing.Point(609, 51);
             this.lblErrorMap.Name = "lblErrorMap";
-            this.lblErrorMap.Size = new System.Drawing.Size(106, 25);
-            this.lblErrorMap.TabIndex = 7;
-            this.lblErrorMap.Text = "Error map";
+            this.lblErrorMap.Size = new System.Drawing.Size(118, 25);
+            this.lblErrorMap.TabIndex = 6;
+            this.lblErrorMap.Text = "Error name";
             this.lblErrorMap.Visible = false;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1050, 408);
+            this.ClientSize = new System.Drawing.Size(809, 408);
             this.Controls.Add(this.lblErrorMap);
-            this.Controls.Add(this.lblErrorName);
-            this.Controls.Add(this.cboMaps);
-            this.Controls.Add(this.lblMapChoice);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblPlayerName);
             this.Controls.Add(this.txtPlayerName);
             this.Name = "LoginForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.LoginForm_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,9 +105,6 @@
         private System.Windows.Forms.Label lblPlayerName;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnQuit;
-        private System.Windows.Forms.Label lblMapChoice;
-        public System.Windows.Forms.ComboBox cboMaps;
-        private System.Windows.Forms.Label lblErrorName;
         private System.Windows.Forms.Label lblErrorMap;
     }
 }

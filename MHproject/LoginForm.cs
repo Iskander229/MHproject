@@ -16,10 +16,10 @@ namespace MHproject
 {
     public partial class LoginForm : Form
     {
-        
+
         //global variable in the form
         FrmGame myGameForm = null;
-       
+
 
         public LoginForm()
         {
@@ -36,51 +36,34 @@ namespace MHproject
                 // If validation errors occurred
                 if (val.ValidationErrorsOccurred)
                 {
-                    lblErrorName.Visible = true;
-                    lblErrorName.Text = val.ValidationError;
+                    lblErrorMap.Visible = true;
+                    lblErrorMap.Text = val.ValidationError;
                     return;
                 }
 
             } while (val.ValidationErrorsOccurred);
 
-            if(cboMaps.SelectedIndex == -1)
+            myGameForm = new FrmGame("", txtPlayerName.Text);
+
+            MessageBox.Show("The GAME has started!");
+
+            myGameForm.ShowDialog(); // opening from modal
+
+            if (myGameForm.gameWon)
             {
-                lblErrorMap.Visible = true;
-                lblErrorMap.Text = "Please choose a map!";
+                MessageBox.Show(txtPlayerName.Text + " won the game");
             }
             else
             {
-                lblErrorName.Visible = false;
-                lblErrorMap.Visible = false;
-
-                myGameForm = new FrmGame("", txtPlayerName.Text);
-
-                MessageBox.Show("The GAME has started!");
-
-                myGameForm.ShowDialog(); // opening from modal
-
-                if (myGameForm.gameWon)
-                {
-                    MessageBox.Show(txtPlayerName.Text + " won the game");
-                }
-                else
-                {
-                    MessageBox.Show(txtPlayerName.Text + " left the game");
-                }
+                MessageBox.Show(txtPlayerName.Text + " left the game");
             }
-           
+
+
         }
 
-        private void LoginForm_Load_1(object sender, EventArgs e)
+        private void btnQuit_Click(object sender, EventArgs e)
         {
-            //add items (maps) to the combobox
-            string[] mapfiles = Directory.GetFiles(@".", "*.txt");
-
-            //list all the files in ....
-            foreach (string eachFile in mapfiles)
-            {
-                cboMaps.Items.Add(eachFile);
-            }
+            Application.Exit();
         }
     }
 }
