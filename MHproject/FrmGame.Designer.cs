@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.btnCreateMap = new System.Windows.Forms.Button();
-            this.picMonster2 = new System.Windows.Forms.PictureBox();
-            this.picMonster1 = new System.Windows.Forms.PictureBox();
             this.picPlayer = new System.Windows.Forms.PictureBox();
             this.cboMaps = new System.Windows.Forms.ComboBox();
             this.lblErrorMap = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picMonster2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMonster1)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblInfos = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblcurrentHP = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,26 +48,6 @@
             this.btnCreateMap.Text = "Create Map";
             this.btnCreateMap.UseVisualStyleBackColor = true;
             this.btnCreateMap.Click += new System.EventHandler(this.btnCreateMap_Click);
-            // 
-            // picMonster2
-            // 
-            this.picMonster2.Image = global::MHproject.Properties.Resources.susPlayerImage;
-            this.picMonster2.Location = new System.Drawing.Point(827, 124);
-            this.picMonster2.Name = "picMonster2";
-            this.picMonster2.Size = new System.Drawing.Size(50, 50);
-            this.picMonster2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picMonster2.TabIndex = 3;
-            this.picMonster2.TabStop = false;
-            // 
-            // picMonster1
-            // 
-            this.picMonster1.Image = global::MHproject.Properties.Resources.susPlayerImage;
-            this.picMonster1.Location = new System.Drawing.Point(713, 124);
-            this.picMonster1.Name = "picMonster1";
-            this.picMonster1.Size = new System.Drawing.Size(50, 50);
-            this.picMonster1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picMonster1.TabIndex = 2;
-            this.picMonster1.TabStop = false;
             // 
             // picPlayer
             // 
@@ -97,23 +77,61 @@
             this.lblErrorMap.Size = new System.Drawing.Size(152, 25);
             this.lblErrorMap.TabIndex = 12;
             this.lblErrorMap.Text = "Error message";
+            this.lblErrorMap.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(93, 880);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 25);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "infos:";
+            // 
+            // lblInfos
+            // 
+            this.lblInfos.AutoSize = true;
+            this.lblInfos.Location = new System.Drawing.Point(163, 880);
+            this.lblInfos.Name = "lblInfos";
+            this.lblInfos.Size = new System.Drawing.Size(47, 25);
+            this.lblInfos.TabIndex = 14;
+            this.lblInfos.Text = "info";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(93, 910);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(120, 25);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "current HP:";
+            // 
+            // lblcurrentHP
+            // 
+            this.lblcurrentHP.AutoSize = true;
+            this.lblcurrentHP.Location = new System.Drawing.Point(230, 910);
+            this.lblcurrentHP.Name = "lblcurrentHP";
+            this.lblcurrentHP.Size = new System.Drawing.Size(36, 25);
+            this.lblcurrentHP.TabIndex = 16;
+            this.lblcurrentHP.Text = "30";
             // 
             // FrmGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 404);
+            this.ClientSize = new System.Drawing.Size(1822, 944);
+            this.Controls.Add(this.lblcurrentHP);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblInfos);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblErrorMap);
             this.Controls.Add(this.cboMaps);
-            this.Controls.Add(this.picMonster2);
-            this.Controls.Add(this.picMonster1);
             this.Controls.Add(this.picPlayer);
             this.Controls.Add(this.btnCreateMap);
             this.Name = "FrmGame";
             this.Text = "FrmGame";
             this.Load += new System.EventHandler(this.FrmGame_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picMonster2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picMonster1)).EndInit();
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmGame_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -124,9 +142,11 @@
 
         private System.Windows.Forms.Button btnCreateMap;
         private System.Windows.Forms.PictureBox picPlayer;
-        private System.Windows.Forms.PictureBox picMonster1;
-        private System.Windows.Forms.PictureBox picMonster2;
         private System.Windows.Forms.ComboBox cboMaps;
         private System.Windows.Forms.Label lblErrorMap;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblInfos;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblcurrentHP;
     }
 }

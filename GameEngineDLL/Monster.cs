@@ -4,29 +4,60 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GameEngineDLL
 {
-    internal class Monster :  Character
+    public class Monster : Character
     {
-        public class monster
+        public int pixelsToMove = 50; // Move in 50-pixel steps
+        public Direction monsterDirection = Direction.None;
+        public PictureBox monsterPictureBox;
+
+        public enum Direction
         {
-            //constants
-            const int pixelsToMove = 50;
+            None, Up, Down, Left, Right
+        }
 
-            //variables
-            List<monster> allmonsters = new List<monster>();
+        public Monster(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
 
-            public int X = 0;
-            public int Y = 0;
-            public Direction monsterDirection;
-            
+        public void Move(char[][] map, Hunter hunter)
+        {
+            Random random = new Random();
+            int dir = random.Next(4); // Randomly select a direction
+            monsterDirection = (Direction)dir;
 
-            public enum Direction
+            int newX = X, newY = Y;
+
+            switch (monsterDirection)
             {
-                None, Up, Down, Left, Right, //0,1,2,3
+                case Direction.Up:
+                    newY--;
+                    break;
+                case Direction.Down:
+                    newY++;
+                    break;
+                case Direction.Left:
+                    newX--;
+                    break;
+                case Direction.Right:
+                    newX++;
+                    break;
             }
 
+            // Validate new position
+            if (newY >= 0 && newY < map.Length &&
+                newX >= 0 && newX < map[newY].Length &&
+                map[newY][newX] != '#' &&
+                !(newX == hunter.X && newY == hunter.Y))
+            {
+                X = newX;
+                Y = newY;
+            }
         }
     }
 }

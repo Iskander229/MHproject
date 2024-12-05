@@ -139,6 +139,7 @@ namespace GameConsole
                         break;
                 }
 
+
             } while (DLLMap.myPlayer.currentHP > 0);
            
         }

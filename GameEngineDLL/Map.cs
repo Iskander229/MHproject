@@ -108,7 +108,7 @@ namespace GameEngineDLL
                 }
 
                 //if meet with a sword
-                if (mapArray[newY][newX] == 'w')
+                if (mapArray[newY][newX] == 'y')
                 {
                     infos = "...";
 
